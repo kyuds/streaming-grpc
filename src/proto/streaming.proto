@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package streaming;
+
+service StreamingService {
+    rpc StreamData(StreamRequest) returns (stream StreamResponse);
+}
+
+message StreamRequest {
+    int64 count = 1;
+}
+
+message StreamResponse {
+    string message = 1;
+    int64 sequence_number = 2;
+    int64 timestamp = 3;
+    ResponseStatus status = 4;
+}
+
+enum ResponseStatus {
+    OK = 0;
+    ERROR = 1;
+    DONE = 2;
+}
